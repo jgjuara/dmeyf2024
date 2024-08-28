@@ -123,7 +123,7 @@ DosArbolesEstimarGanancia <- function(semilla, training_pct, param_rpart1, param
 #------------------------------------------------------------------------------
 
 # Aqui se debe poner la carpeta de la computadora local
-setwd("~/buckets/b1/") # Establezco el Working Directory
+setwd(".") # Establezco el Working Directory
 
 
 # genero numeros primos

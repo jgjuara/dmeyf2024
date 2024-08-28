@@ -7,10 +7,11 @@ require("parallel")
 require("primes")
 require("ggplot2")
 
+semillas <- eval(parse(text = Sys.getenv("semillas")))
 
 PARAM <- list()
 # reemplazar por las propias semillas
-PARAM$semilla_primigenia <- 102191
+PARAM$semilla_primigenia <- semillas[1]
 PARAM$qsemillas <- 10000
 
 # dataset
@@ -43,6 +44,7 @@ particionar <- function(data, division, agrupa = "", campo = "fold", start = 1, 
     by = agrupa
   ]
 }
+
 #------------------------------------------------------------------------------
 
 ArbolEstimarGanancia <- function(semilla, param_basicos) {
@@ -96,11 +98,12 @@ ArbolEstimarGanancia <- function(semilla, param_basicos) {
     "ganancia_test" = ganancia_test_normalizada
   ))
 }
+
 #------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
 
 # Aqui se debe poner la carpeta de la computadora local
-setwd("~/buckets/b1/") # Establezco el Working Directory
+setwd(".") # Establezco el Working Directory
 
 
 # genero numeros primos
@@ -116,8 +119,8 @@ dataset <- fread(PARAM$dataset_nom)
 # trabajo, por ahora, solo con 202104
 dataset <- dataset[foto_mes==202104]
 
-dir.create("~/buckets/b1/exp/EX2330u", showWarnings = FALSE)
-setwd("~/buckets/b1/exp/EX2330u")
+dir.create("./exp/EX2330u", showWarnings = FALSE)
+setwd("./exp/EX2330u")
 
 
 # la funcion mcmapply  llama a la funcion ArbolEstimarGanancia
@@ -126,7 +129,7 @@ salidas <- mcmapply(ArbolEstimarGanancia,
   PARAM$semillas, # paso el vector de semillas
   MoreArgs = list(PARAM), # aqui paso el segundo parametro
   SIMPLIFY = FALSE,
-  mc.cores = detectCores()
+  mc.cores = 1
 )
 
 # muestro la lista de las salidas en testing

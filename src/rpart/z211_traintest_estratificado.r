@@ -3,9 +3,10 @@ gc() # Garbage Collection
 
 require("data.table")
 require("rpart")
+semillas <- eval(parse(text = Sys.getenv("semillas")))
 
 PARAM <- list()
-PARAM$semilla <- 102191
+PARAM$semilla <- semillas[1]
 PARAM$training_pct <- 70L  # entre  1L y 99L 
 
 PARAM$rpart <- list (
@@ -40,7 +41,7 @@ particionar <- function(
 # Aqui comienza el programa
 
 # Establezco el Working Directory, elija una carpeta de su 
-setwd("~/buckets/b1/")
+# setwd("~/buckets/b1/")
 
 # cargo el dataset
 dataset <- fread("./datasets/competencia_01.csv")

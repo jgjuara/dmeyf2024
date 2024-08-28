@@ -6,10 +6,11 @@ require("rpart")
 require("parallel")
 require("primes")
 
+semillas <- eval(parse(text = Sys.getenv("semillas")))
 
 PARAM <- list()
 # reemplazar por las propias semillas
-PARAM$semilla_primigenia <- 102191
+PARAM$semilla_primigenia <- semillas[1]
 PARAM$qsemillas <- 50
 
 # dataset
@@ -99,7 +100,7 @@ ArbolEstimarGanancia <- function(semilla, param_basicos) {
 #------------------------------------------------------------------------------
 
 # Aqui se debe poner la carpeta de la computadora local
-setwd("~/buckets/b1/") # Establezco el Working Directory
+setwd(".") # Establezco el Working Directory
 
 
 # genero numeros primos
@@ -122,7 +123,7 @@ salidas <- mcmapply(ArbolEstimarGanancia,
   PARAM$semillas, # paso el vector de semillas
   MoreArgs = list(PARAM), # aqui paso el segundo parametro
   SIMPLIFY = FALSE,
-  mc.cores = detectCores()
+  mc.cores = 1
 )
 
 # muestro la lista de las salidas en testing
@@ -133,8 +134,7 @@ salidas
 tb_salida <- rbindlist(salidas)
 
 
-for( i in seq(10, 50, 10) )
-{
+for( i in seq(10, 50, 10) ) {
   cat( i, "\t", tb_salida[ 1:i, mean(ganancia_test)], "\n" )
 }
 
