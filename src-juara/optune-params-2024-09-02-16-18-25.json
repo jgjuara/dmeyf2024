@@ -1,0 +1,7 @@
+{
+    "criterion": "trial.suggest_categorical('criterion', ['entropy'])",
+    "max_depth": "trial.suggest_int('max_depth', 2, 40)",
+    "min_samples_split": "trial.suggest_int('min_samples_split', 20, 40)",
+    "min_samples_leaf": "trial.suggest_int('min_samples_leaf', 10, 20)",
+    "max_leaf_nodes": "trial.suggest_int('max_leaf_nodes', 2, 120)"
+}
