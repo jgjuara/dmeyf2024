@@ -32,11 +32,17 @@
 
 # cpayroll2_trx + cpayroll_trx 
 
-# haberes respecto a promedio anterior o mes previo
+# haberes respecto a promedio anterior o mes previo  ---------------------------------------------------
 
-# cpayroll2_trx + cpayroll_trx / lag(cpayroll2_trx + cpayroll_trx, 1 ) 
+# cpayroll2_trx + cpayroll_trx / lag(cpayroll2_trx + cpayroll_trx, 1 )
+
+# prestamos  ---------------------------------------------------
+
+# mprestamos_personales + mprestamos_prendarios + mprestamos_hipotecarios
 
 
+# var prestamos -----------------------------------------------------------
 
-# rank
+# delta t-1  mprestamos_personales + mprestamos_prendarios + mprestamos_hipotecarios
+
 
