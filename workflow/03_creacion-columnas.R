@@ -98,21 +98,52 @@ exportcsv_query <-  "COPY competencia_01 TO 'datasets/competencia_01_lags.csv' (
 # dbExecute(con, exportparquet_query)
 dbExecute(con, exportcsv_query)
 
+
+
 # limite credito compra total ----------------------------------------------------
 
-# Master_mlimitecompra + Visa_mlimitecompra
+query <- "Master_mlimitecompra + Visa_mlimitecompra as total_mlimitecompra,
+          lag1_Master_mlimitecompra + lag1_Visa_mlimitecompra as lag1_total_mlimitecompra"
+
+dbExecute(con, glue::glue("create or replace table competencia_01 as  
+                select *, 
+                {query},
+                from competencia_01"))
 
 # limite financiacion total -----------------------------------------------
 
 # Visa_mfinanciacion_limite + Master_mfinanciacion_limite
 
+query <- "Visa_mfinanciacion_limite + Master_mfinanciacion_limite as total_mfinanciacion_limite,
+          lag1_Visa_mfinanciacion_limite + lag1_Master_mfinanciacion_limite as lag1_total_mfinanciacion_limite "
+
+dbExecute(con, glue::glue("create or replace table competencia_01 as  
+                select *, 
+                {query},
+                from competencia_01"))
+
 # variacion limite total compra --------------------------------------------------
+
+query <- "(total_mlimitecompra/lag1_total_mlimitecompra) - 1 as delta_total_mlimitecompra"
+
+dbExecute(con, glue::glue("create or replace table competencia_01 as  
+                select *, 
+                {query},
+                from competencia_01"))
 
 # delta respecto a t-1 de Master_mlimitecompra + Visa_mlimitecompra
 
 # saldo total credito -----------------------------------------------------
 
 # Master_msaldototal + Visa_msaldototal
+
+query <- "Master_msaldototal + Visa_msaldototal as total_msaldototal,
+          lag1_Master_msaldototal + lag1_Visa_msaldototal as lag1_total_msaldototal"
+
+dbExecute(con, glue::glue("create or replace table competencia_01 as  
+                select *, 
+                {query},
+                from competencia_01"))
 
 #  variacion saldo total credito -------------------------------------------
 
