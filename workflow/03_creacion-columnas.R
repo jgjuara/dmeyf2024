@@ -28,23 +28,23 @@ querys_prep <- pmap(reglas,
                     q2 <- NULL
                     q3 <- NULL
                         
-                    if (isTRUE(percentil)) {
-
-                      q1 <- glue::glue("ntile(100) OVER (ORDER BY {var}) AS percentil_{var}")
-                                            
-                    }
+                    # if (isTRUE(percentil)) {
+                    # 
+                    #   q1 <- glue::glue("ntile(100) over (partition by foto_mes order by {var}) AS percentil_{var}")
+                    #                         
+                    # }
                     
                     if (isTRUE(decil)) {
                       
-                      q2 <- glue::glue("ntile(10) OVER (ORDER BY {var}) AS decil_{var}")
+                      q2 <- glue::glue("ntile(10) over (partition by foto_mes order by {var}) AS decil_{var}")
                       
                     }
                     
-                    if (isTRUE(cuartil)) {
-                      
-                      q3 <- glue::glue("ntile(4) OVER (ORDER BY {var}) AS cuartil_{var}")
-                      
-                    }
+                    # if (isTRUE(cuartil)) {
+                    #   
+                    #   q3 <- glue::glue("ntile(4) over (partition by foto_mes order by {var}) AS cuartil_{var}")
+                    #   
+                    # }
                     
                     paste(c(q1,q2,q3), collapse = ", ")
                       
@@ -93,10 +93,10 @@ dbExecute(con, glue::glue("create or replace table competencia_01 as
                 from competencia_01"))
 
 # exportparquet_query <-  "COPY competencia_01 TO 'datasets/competencia_01_ranks.parquet' (FORMAT PARQUET);"
-exportcsv_query <-  "COPY competencia_01 TO 'datasets/competencia_01_lags.csv' (HEADER, DELIMITER ',');"
+# exportcsv_query <-  "COPY competencia_01 TO 'datasets/competencia_01_lags.csv' (HEADER, DELIMITER ',');"
 # 
 # dbExecute(con, exportparquet_query)
-dbExecute(con, exportcsv_query)
+# dbExecute(con, exportcsv_query)
 
 
 
@@ -122,16 +122,6 @@ dbExecute(con, glue::glue("create or replace table competencia_01 as
                 {query},
                 from competencia_01"))
 
-# variacion limite total compra --------------------------------------------------
-
-query <- "(total_mlimitecompra/lag1_total_mlimitecompra) - 1 as delta_total_mlimitecompra"
-
-dbExecute(con, glue::glue("create or replace table competencia_01 as  
-                select *, 
-                {query},
-                from competencia_01"))
-
-# delta respecto a t-1 de Master_mlimitecompra + Visa_mlimitecompra
 
 # saldo total credito -----------------------------------------------------
 
@@ -145,34 +135,87 @@ dbExecute(con, glue::glue("create or replace table competencia_01 as
                 {query},
                 from competencia_01"))
 
-#  variacion saldo total credito -------------------------------------------
-
-# delta a t-1 de Master_msaldototal + Visa_msaldototal
 
 #  patrimonio en cuenta ---------------------------------------------------
 
 # mcuentas_saldo + minversion1_pesos + minversion2 + mplazo_fijo_dolares +mplazo_fijo_pesos
 
+
+query <- "mcuentas_saldo + minversion1_pesos + minversion2 + mplazo_fijo_dolares + mplazo_fijo_pesos as total_patrimonio,
+          lag1_mcuentas_saldo + lag1_minversion1_pesos + lag1_minversion2 + lag1_mplazo_fijo_dolares + lag1_mplazo_fijo_pesos as lag1_total_patrimonio"
+
+dbExecute(con, glue::glue("create or replace table competencia_01 as  
+                select *, 
+                {query},
+                from competencia_01"))
+
 # suma haberes ---------------------------------------------------
 
 # cpayroll2_trx + cpayroll_trx 
 
-# haberes respecto a promedio anterior o mes previo  ---------------------------------------------------
+query <- "cpayroll2_trx + cpayroll_trx as total_payroll,
+          lag1_cpayroll2_trx + lag1_cpayroll_trx as lag1_total_payroll"
 
-# cpayroll2_trx + cpayroll_trx / lag(cpayroll2_trx + cpayroll_trx, 1 )
+dbExecute(con, glue::glue("create or replace table competencia_01 as  
+                select *, 
+                {query},
+                from competencia_01"))
 
 # prestamos  ---------------------------------------------------
 
 # mprestamos_personales + mprestamos_prendarios + mprestamos_hipotecarios
 
+query <- "mprestamos_personales + mprestamos_prendarios + mprestamos_hipotecarios as total_prestamos,
+          lag1_mprestamos_personales + lag1_mprestamos_prendarios + lag1_mprestamos_hipotecarios as lag1_total_prestamos"
 
-# var prestamos -----------------------------------------------------------
-
-# delta t-1  mprestamos_personales + mprestamos_prendarios + mprestamos_hipotecarios
+dbExecute(con, glue::glue("create or replace table competencia_01 as  
+                select *, 
+                {query},
+                from competencia_01"))
 
 # vars falopa -------------------------------------------------------------
 
 # var si cumplio anios como var entre edad y lag(edad)
-# var si sumo o resto extensiones u adicionales (hijxs pareja etc)
+
+query <- "cliente_edad - lag1_cliente_edad as cumpleanios"
+
+dbExecute(con, glue::glue("create or replace table competencia_01 as  
+                select *, 
+                {query},
+                from competencia_01"))
+
 # var cliente_antiguedad binned (responde a quienes entraron juntos)
 
+
+# regresiones -------------------------------------------------------------
+
+columnas <- dbGetQuery(con, "SELECT column_name
+FROM information_schema.columns
+WHERE table_name = 'competencia_01';")
+
+columnas <- columnas[["column_name"]]
+
+columnas <- columnas[! grepl("numero_de_cliente|foto_mes", columnas)]
+
+columnas <- columnas[! grepl("lag1|cumpleanios", columnas)]
+
+querys_reg <- sapply(columnas, function(x) {
+  glue::glue("regr_slope({var}) over ventana_3 as betareg_{}
+             from competencia_01
+             window ventana_3 as (partition by numero_de_cliente order by foto_mes rows between 1 preceding and current row)")
+})
+
+querys_reg <- paste(querys_reg, collapse = ", ")
+
+dbExecute(con, glue::glue("create or replace table competencia_01 as  
+                select *, 
+                {querys_reg},
+                from competencia_01"))
+
+
+
+# exportparquet_query <-  "COPY competencia_01 TO 'datasets/competencia_01_aum.parquet' (FORMAT PARQUET);"
+# exportcsv_query <-  "COPY competencia_01 TO 'datasets/competencia_01_aum.csv' (HEADER, DELIMITER ',');"
+
+# exportparquet_query <-  "COPY competencia_01 TO 'datasets/competencia_01_aum.parquet' (FORMAT PARQUET);"
+# dbExecute(con, exportparquet_query)
