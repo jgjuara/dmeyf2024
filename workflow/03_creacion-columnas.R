@@ -46,9 +46,9 @@ querys_prep <- pmap(reglas,
                     #   
                     # }
                     
-                    paste(c(q1,q2,q3), collapse = ", ")
+                    # paste(c(q1,q2,q3), collapse = ", ")
                       
-                    
+                    q2
                       
         })
 
@@ -59,7 +59,7 @@ querys_prep <- paste(querys_prep, collapse = ", ")
 
 dbExecute(con, glue::glue("create or replace table competencia_01 as  
                 select *, 
-                {querys_prep},
+                {querys_prep}
                 from competencia_01"))
 
 
@@ -75,6 +75,7 @@ dbExecute(con, glue::glue("create or replace table competencia_01 as
 columnas <- dbGetQuery(con, "SELECT column_name
 FROM information_schema.columns
 WHERE table_name = 'competencia_01';")
+
 
 columnas <- columnas[["column_name"]]
 
@@ -190,8 +191,9 @@ dbExecute(con, glue::glue("create or replace table competencia_01 as
 # regresiones -------------------------------------------------------------
 
 columnas <- dbGetQuery(con, "SELECT column_name
-FROM information_schema.columns
-WHERE table_name = 'competencia_01';")
+    FROM information_schema.columns
+    WHERE table_name = 'competencia_01'
+      AND data_type IN ('INTEGER', 'BIGINT', 'DOUBLE', 'FLOAT', 'REAL', 'NUMERIC', 'DECIMAL');")
 
 columnas <- columnas[["column_name"]]
 
@@ -200,22 +202,40 @@ columnas <- columnas[! grepl("numero_de_cliente|foto_mes", columnas)]
 columnas <- columnas[! grepl("lag1|cumpleanios", columnas)]
 
 querys_reg <- sapply(columnas, function(x) {
-  glue::glue("regr_slope({var}) over ventana_3 as betareg_{}
-             from competencia_01
-             window ventana_3 as (partition by numero_de_cliente order by foto_mes rows between 1 preceding and current row)")
+  glue::glue("regr_slope(foto_mes, {x}) over ventana_3 as betareg_{x}")
 })
 
 querys_reg <- paste(querys_reg, collapse = ", ")
 
-dbExecute(con, glue::glue("create or replace table competencia_01 as  
+
+  dbExecute(con, glue::glue("create or replace table competencia_01 as  
                 select *, 
-                {querys_reg},
-                from competencia_01"))
+                {querys_reg}
+                from competencia_01 
+                window ventana_3 as (partition by numero_de_cliente order by foto_mes rows between 1 preceding and current row)"))
 
 
 
-# exportparquet_query <-  "COPY competencia_01 TO 'datasets/competencia_01_aum.parquet' (FORMAT PARQUET);"
+
+
+# exlcusion de columnas ---------------------------------------------------
+
+  
+  columnas <- dbGetQuery(con, "SELECT column_name
+FROM information_schema.columns
+WHERE table_name = 'competencia_01';")
+  
+  
+  columnas <- columnas[["column_name"]]
+  
+  columnas <- columnas[grepl("lag1_clase", columnas)]
+  
+  
+  dbExecute(con, glue::glue("create or replace table competencia_01 as  
+                select * exclude ({columnas})
+                from competencia_01;"))
+
 # exportcsv_query <-  "COPY competencia_01 TO 'datasets/competencia_01_aum.csv' (HEADER, DELIMITER ',');"
 
-# exportparquet_query <-  "COPY competencia_01 TO 'datasets/competencia_01_aum.parquet' (FORMAT PARQUET);"
-# dbExecute(con, exportparquet_query)
+exportparquet_query <-  "COPY competencia_01 TO 'datasets/competencia_01_aum.parquet' (FORMAT PARQUET);"
+dbExecute(con, exportparquet_query)
