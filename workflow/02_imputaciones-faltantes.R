@@ -18,7 +18,7 @@ reglas <- reglas %>% filter(!is.na(CASO_NULL))
 
 query_imputacion_nulos <- map2(reglas$var, reglas$CASO_NULL,
      function(x,y) {
-       glue::glue("coalesce ({x}, {y}) as {x}_imp")
+       glue::glue("coalesce ({x}, {y}) as {x}")
      })
 
 query_imputacion_nulos <- unlist(query_imputacion_nulos)
