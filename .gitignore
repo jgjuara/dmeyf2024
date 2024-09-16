@@ -183,3 +183,4 @@ project/target
 
 .vscode/settings.json
 .Rproj.user
+src-juara/.env
