@@ -1,6 +1,8 @@
 library(duckdb)
 library(tidyverse)
 
+source("workflow/macros_sql.R")
+
 con <- dbConnect(duckdb())
 
 data <- duckdb_read_csv(conn = con, "competencia_01",
@@ -188,7 +190,7 @@ dbExecute(con, glue::glue("create or replace table competencia_01 as
 # var cliente_antiguedad binned (responde a quienes entraron juntos)
 
 
-# regresiones -------------------------------------------------------------
+# variaciones -------------------------------------------------------------
 
 columnas <- dbGetQuery(con, "SELECT column_name
     FROM information_schema.columns
@@ -201,18 +203,27 @@ columnas <- columnas[! grepl("numero_de_cliente|foto_mes", columnas)]
 
 columnas <- columnas[! grepl("lag1|cumpleanios", columnas)]
 
-querys_reg <- sapply(columnas, function(x) {
-  glue::glue("regr_slope(foto_mes, {x}) over ventana_3 as betareg_{x}")
-})
 
-querys_reg <- paste(querys_reg, collapse = ", ")
+# querys_reg <- sapply(columnas, function(x) {
+#   glue::glue("regr_slope(foto_mes, {x}) over ventana_3 as betareg_{x}")
+# })
+querys_variaciones <- sapply(columnas,
+                             function(x) {
+                               glue::glue("safe_division({x}, lag({x}, 1) over (partition by numero_de_cliente order by foto_mes)) - 1 AS variacion_{x}")
+                               })
 
+# querys_reg <- paste(querys_reg, collapse = ", ")
+
+querys_variaciones <- paste(querys_variaciones, collapse = ", ")
+
+dbGetQuery(con, glue::glue("select safe_division(mcuentas_saldo, lag(mcuentas_saldo, 1) over (partition by numero_de_cliente order by foto_mes)) - 1 as varx
+                from competencia_01"))
 
   dbExecute(con, glue::glue("create or replace table competencia_01 as  
                 select *, 
-                {querys_reg}
-                from competencia_01 
-                window ventana_3 as (partition by numero_de_cliente order by foto_mes rows between 1 preceding and current row)"))
+                {querys_variaciones}
+                from competencia_01"))
+                # window ventana_3 as (partition by numero_de_cliente order by foto_mes rows between 1 preceding and current row)"))
 
 
 
@@ -221,21 +232,39 @@ querys_reg <- paste(querys_reg, collapse = ", ")
 # exlcusion de columnas ---------------------------------------------------
 
   
-  columnas <- dbGetQuery(con, "SELECT column_name
-FROM information_schema.columns
-WHERE table_name = 'competencia_01';")
+# columnas <- dbGetQuery(con, "SELECT column_name
+# FROM information_schema.columns
+# WHERE table_name = 'competencia_01';")
+# 
+# columnas <- columnas[["column_name"]]
   
-  
-  columnas <- columnas[["column_name"]]
-  
-  columnas <- columnas[grepl("lag1_clase", columnas)]
+columnas <- "lag1_clase_ternaria"
   
   
   dbExecute(con, glue::glue("create or replace table competencia_01 as  
                 select * exclude ({columnas})
                 from competencia_01;"))
-
-# exportcsv_query <-  "COPY competencia_01 TO 'datasets/competencia_01_aum.csv' (HEADER, DELIMITER ',');"
+  
+  
+exportcsv_query <-  "COPY competencia_01 TO 'datasets/competencia_01_aum.csv' (HEADER, DELIMITER ',');"
 
 exportparquet_query <-  "COPY competencia_01 TO 'datasets/competencia_01_aum.parquet' (FORMAT PARQUET);"
 dbExecute(con, exportparquet_query)
+dbExecute(con, exportcsv_query)
+
+
+
+columnas <- dbGetQuery(con, "SELECT column_name
+FROM information_schema.columns
+WHERE table_name = 'competencia_01';")
+
+x <- list()
+for (i in columnas$column_name[!grepl("foto_mes",columnas$column_name )]) {
+  x[[i]] <- dbGetQuery(con, glue::glue("select {i}, foto_mes
+                                   from competencia_01
+                                  where {i} is NULL;"))
+
+}
+
+# x %>% bind_rows(, .id = "var") %>% 
+#   pivot_longer(cols = everything()) %>% view

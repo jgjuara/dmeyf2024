@@ -18,7 +18,7 @@ reglas <- reglas %>% filter(!is.na(CASO_NULL))
 
 query_imputacion_nulos <- map2(reglas$var, reglas$CASO_NULL,
      function(x,y) {
-       glue::glue("coalesce ({x}, {y}) as {x}")
+       glue::glue("ifnull ({x}, {y}) as {x}")
      })
 
 query_imputacion_nulos <- unlist(query_imputacion_nulos)
@@ -26,8 +26,9 @@ query_imputacion_nulos <- unlist(query_imputacion_nulos)
 query_imputacion_nulos <- paste(query_imputacion_nulos, collapse = ", ")
 
 dbExecute(con, glue::glue("create or replace table competencia_01 as  
-                select *, 
-                {query_imputacion_nulos},
+                select {vars_not_nulls},
+                clase_ternaria,
+                {query_imputacion_nulos}
                 from competencia_01"))
 
 exportparquet_query <-  "COPY competencia_01 TO 'datasets/competencia_01_imp_nulos.parquet' (FORMAT PARQUET);"
@@ -35,3 +36,20 @@ exportcsv_query <-  "COPY competencia_01 TO 'datasets/competencia_01_imp_nulos.c
 
 dbExecute(con, exportparquet_query)
 dbExecute(con, exportcsv_query)
+
+
+columnas <- dbGetQuery(con, "SELECT column_name
+FROM information_schema.columns
+WHERE table_name = 'competencia_01';")
+
+x <- list()
+for (i in columnas$column_name[! grepl("foto_mes", columnas$column_name)]) {
+  x[[i]] <- dbGetQuery(con, glue::glue("select {i}, foto_mes
+                                   from competencia_01
+                                  where {i} is NULL;")) %>% 
+    count(foto_mes)
+  
+  print(x[[i]])
+}
+
+x %>% bind_rows(, .id = "var")

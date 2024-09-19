@@ -1,5 +1,5 @@
 library(duckdb)
-library(duckplyr)
+# library(duckplyr)
 
 con <- dbConnect(duckdb())
 
