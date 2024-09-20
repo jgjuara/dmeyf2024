@@ -8,7 +8,7 @@ source("workflow/macros_sql.R")
 
 
 data <- duckdb_read_csv(conn = con, "competencia_01",
-                        files = "datasets/competencia_01.csv")
+                        files = "datasets/competencia_01_imp_nulos.csv")
 
 reglas <- read_csv("workflow/rankscsv.txt")
 
@@ -248,9 +248,9 @@ columnas <- "lag1_clase_ternaria"
                 from competencia_01;"))
   
   
-exportcsv_query <-  "COPY competencia_01 TO 'datasets/competencia_01_aum_nonimp.csv' (HEADER, DELIMITER ',');"
+exportcsv_query <-  "COPY competencia_01 TO 'datasets/competencia_01_aum.csv' (HEADER, DELIMITER ',');"
 
-exportparquet_query <-  "COPY competencia_01 TO 'datasets/competencia_01_aum_nonimp.parquet' (FORMAT PARQUET);"
+exportparquet_query <-  "COPY competencia_01 TO 'datasets/competencia_01_aum.parquet' (FORMAT PARQUET);"
 dbExecute(con, exportparquet_query)
 dbExecute(con, exportcsv_query)
 
