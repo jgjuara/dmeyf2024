@@ -1,0 +1,155 @@
+"var","min","max","nunique","nulls","DESCRIPCION","CASO_NULL"
+"cdescubierto_preacordado",0,1,2,0,"Si tiene un acuerdo de descubierto",-1
+"ccaja_seguridad",0,6,7,0,"Si el cliente tiene cajas de seguridad.  Un 0 si no tiene ninguna, un 1 si tiene al menos una caja de seguridad. { 0, 1 } son los unicos dos valores posibles .",-1
+"Master_msaldopesos","-1198282.68","5315734.29",308104,101319,"Saldo total el pesos de la tarjeta, para ese mes.",0
+"Visa_msaldopesos","-920766.34","5323575.42",765628,48838,"Saldo total el pesos de la tarjeta, para ese mes.",0
+"Master_msaldodolares","-656164.21","1699543.44",18253,101319,"Saldo total el dólares de la tarjeta, para ese mes.",0
+"Visa_msaldodolares","-915072.77","4232782.24",49415,48838,"Saldo total el dólares de la tarjeta, para ese mes.",0
+"mcuentas_saldo","-25118916.54","372957539.6",925080,0,"Saldo total de TODAS las cuentas del cliente",
+"Master_msaldototal","-1198282.68","5315734.29",310657,101319,"Saldo total de la tarjeta, para ese mes.",0
+"Visa_msaldototal","-1218009.3","6496667.59",766963,48838,"Saldo total de la tarjeta, para ese mes.",0
+"mpayroll",0,"44295403.01",393084,0,"Monto total que le acreditaron los empleadores “acreditados”  al cliente durante el mes.",
+"mpayroll2",0,1682828,839,0,"Monto total que le acreditaron fuera de archivo de los empleadores “acreditados”  al cliente durante el mes.",
+"mforex_sell",0,"91603.56",1403,0,"Monto total medido en pesos de  transacciones de venta de moneda extranjera que realizó el cliente durante el mes",
+"mforex_buy",0,"91603.56",1331,0,"Monto total medido en pesos de  transacciones de compra de moneda extranjera que realizó el cliente durante el mes",
+"Master_mconsumototal","-108002.98","5171670.94",193859,586300,"Monto total expresado en pesos,  de todos los consumos ( pesos y dolares )  efectuados por el cliente durante ese mes.",0
+"Visa_mconsumototal","-1849979.55","4323421.99",614223,133593,"Monto total expresado en pesos,  de todos los consumos ( pesos y dolares )  efectuados por el cliente durante ese mes.",0
+"mcomisiones_otras","-134235.24","1167083.11",343988,0,"Monto total en pesos de otras comisiones que se cobraron al cliente durante el mes.",
+"mcomisiones_mantenimiento","-15494.48","14167.75",2011,0,"Monto total en pesos de comisiones de mantenimiento de productos cobrardas durante el banco durante el mes.",
+"mpagomiscuentas",0,"933611338.7",392137,0,"Monto total en pesos argentinos de pagos efectuados durante el mes por el canal PagoMisCuentas",
+"matm_other",0,"1716783.93",1506,0,"Monto total en pesos  de transacciones que el cliente realizó durante el mes en cajeros automáticos que no son propiedad del banco.",
+"matm",0,3519000,5613,0,"Monto total en pesos  de transacciones que el cliente realizó durante el mes en cajeros automáticos propiedad del banco.",
+"mcajeros_propios_descuentos",0,"36279.03",15662,0,"Monto total en pesos  de descuentos con los que se benefició el cliente al utilizar su tarjeta de débito durante el mes.",
+"mtarjeta_visa_descuentos",0,"178072.66",21684,16998,"Monto total en pesos  de descuentos con los que se benefició el cliente al utilizar su tarjeta de crédito VISA durante el mes.",-1
+"mtarjeta_master_descuentos",0,"104532.18",7631,23521,"Monto total en pesos  de descuentos con los que se benefició el cliente al utilizar su tarjeta de crédito MasterCard durante el mes.",-1
+"mtransferencias_recibidas",0,"938923768.66",364026,0,"Monto total de transferencias recibidas en todas las cuentas durante el mes. Puede ser transferencias propias o de terceros.",
+"mtransferencias_emitidas",0,189927468,225795,0,"Monto total de transferencias emitidas en todas las cuentas durante el mes. Puede ser transferencias propias o de terceros.",
+"mplazo_fijo_pesos",0,"47924270.47",3187,0,"Monto total de todos los plazos fijos vigentes en pesos.  ",
+"mplazo_fijo_dolares",0,90907500,28282,0,"Monto total de todos los plazos fijos vigentes el dólares.  El valor está convertido a pesos considerando el valor de cierre del ultimo dia habil del mes.",
+"Master_mpagospesos","-3717003.76","351481.16",249454,586300,"Monto total de todos los pagos en pesos efectuados por el cliente",0
+"Visa_mpagospesos","-7691583.11","311131.86",673530,133593,"Monto total de todos los pagos en pesos efectuados por el cliente",0
+"Master_mpagosdolares",0,"26434.09",6026,586300,"Monto total de todos los pagos en dólares efectuados por el cliente",0
+"Visa_mpagosdolares",0,"45270.39",13850,133593,"Monto total de todos los pagos en dólares efectuados por el cliente",0
+"Master_mpagado",0,"5315734.29",37329,101319,"Monto total de todos los pagos efectuados por el cliente",-1
+"Visa_mpagado",0,2639250,120099,48838,"Monto total de todos los pagos efectuados por el cliente",-1
+"mpagodeservicios",0,"2478633.83",6720,0,"Monto total de pagos de servicios efectuados durante el mes.",-1
+"Master_mconsumospesos","-108002.98","5171670.94",193859,586300,"Monto total de los consumos en pesos efectuados por el cliente durante ese mes.",0
+"Visa_mconsumospesos","-1849979.55","4323421.99",614223,133593,"Monto total de los consumos en pesos efectuados por el cliente durante ese mes.",0
+"Master_mconsumosdolares",0,"17642.09",7139,586300,"Monto total de los consumos en dolares efectuados por el cliente durante ese mes.",0
+"Visa_mconsumosdolares",0,"45268.61",19896,133593,"Monto total de los consumos en dolares efectuados por el cliente durante ese mes.",0
+"mtarjeta_visa_consumo",0,"4872732.82",733671,0,"Monto total de los consumos efectuados durante el mes con la tarjeta de crédito VISA",0
+"mtarjeta_master_consumo",0,"5252701.87",268792,0,"Monto total de los consumos efectuados durante el mes con la tarjeta de crédito MasterCard",0
+"mcheques_depositados",0,"62221756.37",23026,0,"Monto total de los cheques que se depositaron y se pudo hacer el cobro , en las cuentas del cliente durante el mes.",0
+"mcheques_depositados_rechazados",0,"4089887.93",1187,0,"Monto total de los cheques que se depositaron en cuentas del cliente y fueron rechazados durante el mes.",0
+"mautoservicio",0,"1049277.96",556774,0,"Monto total de las transacciones que hizo el cliente con su tarjeta de débito duirante el mes.",0
+"mcuenta_corriente_adicional","-1990016.09","6581942.16",427,0,"Monto total de las cuentas corrientes adicionales que no forman parte del paquete.",0
+"mcuenta_corriente","-2065768.41","29321773.35",329325,0,"Monto total de las cuenta corriente del paquete premium",0
+"mcomisiones","-134235.24","1167083.11",343248,0,"Monto total de las comisiones que ha ganado el banco por ese cliente.",0
+"mcaja_ahorro_adicional","-37441.05","5058863.11",17772,0,"Monto total de las cajas otras cajas de ahorro que no forman parte del paquete.",
+"mcaja_ahorro_dolares","-25470.15","93883943.48",223409,0,"Monto total de las cajas de ahorro en dólares.  El valor esta expresado en pesos, y se considera el valor del dolar de cierre del último dia hábil del mes.",
+"minversion2",0,"379246783.74",25368,0,"Monto total de la inversión de tipo2  expresada en pesos.",
+"mpasivos_margen","-103791.29","2414341.23",369522,0,"Monto total de la ganancia que el banco ha obtenido por el dinero/inversiones que el cliente tiene en el banco.",
+"mactivos_margen","-437925.21","381076.48",512494,0,"Monto total de la ganancia que el banco ha obtenido en concepto de intereses que ha cobrado al cliente.",
+"mprestamos_prendarios",0,23460000,8207,0,"Monto total de la deuda restante de todos los préstamos prendarios del cliente.",
+"mprestamos_personales",0,"5506583.96",175017,0,"Monto total de la deuda restante de todos los préstamos personales del cliente.",
+"mprestamos_hipotecarios",0,"23794171.18",9630,0,"Monto total de la deuda restante de todos los préstamos hipotecarios del cliente.",
+"mcaja_ahorro","-15048.51","40285485.23",846337,0,"Monto total de la caja de ahorro del Paquete Premium",
+"minversion1_dolares",0,"44677704.32",3574,0,"Monto total de inversiones tipo1 en dolares , expresado en pesos al ultimo dia habil del mes",
+"minversion1_pesos",0,"69494621.47",32412,0,"Monto total de inversiones tipo1 , convertidos en pesos",
+"mextraccion_autoservicio",0,3519000,6410,0,"Monto total de extracciones en cajeros automáticos durante el mes",
+"mcheques_emitidos",0,"46917026.49",16665,0,"Monto total de cheques del cliente que se cobraron ( ya sea por el cliente mismo o por terceros )  durante el mes .",
+"mcuenta_debitos_automaticos",0,"93231740.76",237478,0,"Monto total de  débitos automáticos debitados durante el mes en las cuentas  ( no tarjetas de crédito ) . Todo está convertido a pesos argentinos, al valor de la fecha de cierre del utlimo dia habil del mes.",
+"mttarjeta_visa_debitos_automaticos",0,"1916174.65",387938,0,"Monto total de  débitos automáticos debitados durante el mes en la tarjeta de crédito VISA . Todo está convertido a pesos argentinos, al valor de la fecha de cierre del utlimo dia habil del mes.",
+"mttarjeta_master_debitos_automaticos",0,"857987.8",88061,0,"Monto total de  débitos automáticos debitados durante el mes en la tarjeta de crédito MasterCard . Todo está convertido a pesos argentinos, al valor de la fecha de cierre del utlimo dia habil del mes.",
+"mcheques_emitidos_rechazados",0,5960435,1042,0,"Monto total  de cheques emitidos por el cliente que fueron rechazados durante el mes.",
+"Master_mpagominimo",0,"1820812.71",7952,101319,"Monto del pago minimo necesario para no ser moroso de la tarjeta de crédito",-1
+"Visa_mpagominimo",0,"4066755.81",12033,48838,"Monto del pago minimo necesario para no ser moroso de la tarjeta de crédito",-1
+"foto_mes",202101,202106,6,0,"mes correspondiente a la foto de los datos del datawarehouse. La fecha 201907 indica que la foto fue obtenida el 31-julio-2019 a las 23:59:59",
+"Master_mfinanciacion_limite",0,"350302669.59",708,101319,"Límite de financiacion de la tarjeta de crédito, expresado en pesos.",-1
+"Visa_mfinanciacion_limite",0,"339068148.15",676,48838,"Límite de financiacion de la tarjeta de crédito, expresado en pesos.",-1
+"Master_mlimitecompra","985.32","10783342.08",567,101319,"Límite de compra, valor muy importante.",-1
+"Visa_mlimitecompra","1011.71",17595000,563,48838,"Límite de compra, valor muy importante.",-1
+"cliente_vip",0,1,2,0,"Indica si marketing considera a esa cliente un cliente vip al momento de obtención de la foto.  A pesar que todos estos son clientes de Paquete Premium,  el area de marketing solo considera vip a menos del  2% de los paquete premium , y da a estos clientes VIP un trato a puertas cerradas.",
+"internet",0,4,5,0,"indica si el cliente usa servicios de HomeBanking o tiene instalada la app",
+"active_quarter",0,1,2,0,"Indica si el cliente ha realizado transacciones voluntarias en el ultimo timestre . Que el banco cobre la comisión de mantenimiento de cuenta NO es un movimiento voluntario por mas que es un debito en la cuenta.  Que se cobre una cuota de una compra con tarjeta de crédito, tampoco es un movimiento voluntario.",
+"cmobile_app_trx",0,1,2,0,"indica la cantidad de transacciones realizadas ese mes desde la aplicacion móvil",
+"numero_de_cliente",249221109,1598518152,169481,0,"ID único que se asigna a cada cliente.  Clientes mas nuevos tienen Ids mayores.  Si un ex cliente regresa se le asigna el  numero_de_cliente que ya tuvo asignado la primera vez.",
+"mrentabilidad","-447330.64","2832072.91",601230,0,"Ganancia total que ha obtenido el banco de ese cliente, en ese mes.",
+"mrentabilidad_annual","-1487712.49","4532265.92",911216,0,"Ganancia total que el banco ha obtenido de ese cliente en el ultimo año de relacion cliente-banco,  o meses desde que ingresó si es cliente reciente.",
+"Master_madelantopesos",0,99784,151,586300,"Extracciones de pesos realizadas con la tarjeta de crédito durante ese mes.",-1
+"Visa_madelantopesos",0,188853,231,133593,"Extracciones de pesos realizadas con la tarjeta de crédito durante ese mes.",-1
+"Master_madelantodolares",0,1056,48,586300,"Extracciones de dolares realizadas con la tarjeta de crédito durante ese mes.",-1
+"Visa_madelantodolares",0,708,83,133593,"Extracciones de dolares realizadas con la tarjeta de crédito durante ese mes.",-1
+"cliente_edad",18,105,86,0,"Edad en años del cliente.",
+"Master_Fvencimiento",-2914237,5206,446,101319,"Dias para el vencimiento del plastico de la tarjeta de crédito, contados a la fecha de la foto.",-999999999
+"Visa_Finiciomora",0,269,96,968318,"Dias para el inicio de la mora ( el dia siguiente al vencimiento ), contados a la fecha de la foto",-99
+"Visa_Fvencimiento",-2914237,4749,418,48838,"Dias para el  vencimiento del plastico de la tarjeta de crédito, contados a la fecha de la foto",-999999999
+"Master_Finiciomora",-1,268,101,977048,"Dias desde el inicio de la mora ( el dia siguiente al vencimiento ), contados a la fecha de la foto.",-99
+"Visa_fechaalta",1,12728,10822,48838,"Dias desde el alta de la cuenta de la tarjeta de crédito, contados a la fecha de la foto.",-1
+"Master_fultimo_cierre",-3,3388,57,101770,"Dias desde del utlimo cierre de la tarjeta de crédito, contados a la fecha de la foto.",-999999
+"Master_fechaalta",1,7693,7385,101319,"Dias desde de alta de la cuenta de la tarjeta de crédito, contados a la fecha de la foto.",-1
+"Visa_fultimo_cierre",-3,3388,58,49162,"Dias  del utlimo cierre de la tarjeta de crédito, contados a la fecha de la foto.",-999999
+"ctransferencias_recibidas",0,961,323,0,"Cantidad de transferencias recibidas en todas las cuentas durante el mes. Puede ser transferencias propias o de terceros.",
+"ctransferencias_emitidas",0,272,159,0,"Cantidad de transferencias emitidas  en todas las cuentas durante el mes. Puede ser transferencias propias o de terceros.",
+"ctarjeta_debito_transacciones",0,220,159,0,"Cantidad de transacciones que hizo el cliente con su tarjeta de débito durante el mes.",
+"ccajas_transacciones",0,1,2,0,"Cantidad de transacciones que el cliente realizó durante el mes en la linea de cajas de las sucursales del banco.",
+"catm_trx_other",0,65,53,0,"Cantidad de transacciones que el cliente realizó durante el mes en cajeros automáticos que no son propiedad del banco.",
+"catm_trx",0,340,108,0,"Cantidad de transacciones que el cliente realizó durante el mes en cajeros automáticos propiedad del banco.",
+"ccallcenter_transacciones",0,131,75,0,"Cantidad de transacciones que el cliente efectuó durante el mes por el canal de banca telefónica.",
+"chomebanking_transacciones",0,6671,1094,0,"Cantidad de transacciones por home banking que el cliente hizo durante el mes.",
+"ctarjeta_visa_transacciones",0,596,250,0,"Cantidad de transacciones efectuadas durante el mes con la tarjeta de crédito VISA",
+"ctarjeta_master_transacciones",0,334,165,0,"Cantidad de transacciones efectuadas durante el mes con la tarjeta de crédito MasterCard",
+"cforex_sell",0,22,17,0,"Cantidad de transacciones de venta de moneda extranjera que realizó el cliente durante el mes",
+"cforex_buy",0,13,12,0,"Cantidad de transacciones de compra de moneda extranjera que realizó el cliente durante el mes",
+"cforex",0,22,17,0,"Cantidad de transacciones de cambio de moneda que realizó el cliente durante el mes.",
+"cpayroll2_trx",0,6,7,0,"Cantidad de transacciones de acreditacion de haberes en el mes",
+"ctarjeta_debito",0,25,14,0,"Cantidad de tarjetas de débito que posee el cliente.",
+"cseguro_vivienda",0,5,6,0,"Cantidad de seguros de vivienda que tiene el cliente.",
+"cseguro_vida",0,3,4,0,"Cantidad de seguros de vida contratados por el cliente. No se tienen en cuenta los seguros de vida obligatorios de los prestamos hipotecarios, prendarios, personales, etc",
+"cseguro_accidentes_personales",0,4,4,0,"Cantidad de seguros de accidentes personales",
+"cseguro_auto",0,6,6,0,"Cantidad de seguros automotores que el cliente posee vigentes.",
+"cproductos",3,17,15,0,"Cantidad de productos que el cliente posee con el banco. Se cuentan las familias de productos.",
+"cprestamos_prendarios",0,22,23,0,"Cantidad de préstamos prendarios vigentes  del cliente",
+"cprestamos_personales",0,398,227,0,"Cantidad de préstamos personales vigentes  del cliente",
+"cprestamos_hipotecarios",0,23,24,0,"Cantidad de préstamos hipotecarios vigentes  del cliente",
+"cplazo_fijo",0,103,55,0,"Cantidad de plazos fijos que tiene el cliente Se suma la cantidad de plazos fijos en pesos mas la cantidad de plazos fijos en dolares.",
+"cpagomiscuentas",0,323,115,0,"Cantidad de pagos efectuados durante el mes por el canal PagoMisCuentas",
+"cpagodeservicios",0,60,32,0,"Cantidad de pagos de servicios efectuados durante el mes.",
+"ccajas_otras",0,138,44,0,"Cantidad de otros tipos de transacciones  que el cliente realizó durante el mes en la linea de cajas de las sucursales del banco.",
+"ccomisiones_otras",0,450,244,0,"Cantidad de otras comisiones que se cobraron al cliente durante el mes.",
+"ctrx_quarter",0,2746,1238,0,"Cantidad de movimientos voluntarios en las cuentas bancarias ( no tarjeta de credito ) que el cliente realizó en los ultimos 90 dias.",
+"cinversion2",0,77,65,0,"Cantidad de inversiones de tipo2 que posee el cliente vigentes.",
+"cinversion1",0,16,15,0,"Cantidad de inversiones de tipo 1 que posee el cliente vigentes.",
+"cextraccion_autoservicio",0,340,110,0,"Cantidad de extracciones en cajeros automáticos durante el mes",
+"ccajas_extracciones",0,17,17,0,"Cantidad de extracciones  que el cliente realizó durante el mes en la linea de cajas de las sucursales del banco.",
+"ccajeros_propios_descuentos",0,20,19,0,"Cantidad de descuentos con los que se benefició el cliente al utilizar su tarjeta de débito durante el mes.",
+"ctarjeta_visa_descuentos",0,23,19,0,"Cantidad de descuentos con los que se benefició el cliente al utilizar su tarjeta de crédito VISA durante el mes.",
+"ctarjeta_master_descuentos",0,31,27,0,"Cantidad de descuentos con los que se benefició el cliente al utilizar su tarjeta de crédito MasterCard durante el mes.",
+"ccajas_depositos",0,48,27,0,"Cantidad de depóstitos que el cliente realizó durante el mes en la linea de cajas de las sucursales del banco.",
+"ctarjeta_visa_debitos_automaticos",0,57,55,0,"Cantidad de débitos automáticos debitados durante el mes en las tarjeta de crédito VISA",
+"ctarjeta_master_debitos_automaticos",0,31,30,0,"Cantidad de débitos automáticos debitados durante el mes en las tarjeta de crédito MasterCard",
+"ccuenta_debitos_automaticos",0,310,75,0,"Cantidad de débitos automáticos debitados durante el mes en las cuentas  ( no tarjetas de crédito )",
+"ctarjeta_visa",0,3,4,0,"Cantidad de cuentas VISA que posee el cliente. Una cuenta posee un titular y puede llegar a tener varios adicionales. El titular y/o adicionales pueden tener ( o no ) un plástico vigente. Aunque no es común, un cliente SI puede ser titular de más de una cuenta VISA .",
+"tcuentas",1,2,2,0,"Cantidad de cuentas que el cliente tiene,  vale 0 si no tiene ninguna,  1 si solo tiene cajas de ahorro o solo cuentas corrientes,  2 si tiene al menos una caja de ahorro y tambien al menos una cuenta corriente.",
+"ctarjeta_master",0,2,3,0,"Cantidad de cuentas Mastercard que tiene la persona.  Una cuenta puede tener un plástico titular y varias plásticos adicionales.",
+"ccuenta_corriente",1,3,3,0,"Cantidad de cuentas corrientes que tiene el cliente. Hay muy pocos clientes con mas de una cuenta corriente.",
+"Master_cconsumos",0,199,121,586300,"Cantidad de consumos con la tarjeta de credito efectuados por el cliente durante el mes.",-1
+"Visa_cconsumos",0,241,159,133593,"Cantidad de consumos con la tarjeta de credito efectuados por el cliente durante el mes.",-1
+"ccajas_consultas",0,70,31,0,"Cantidad de consultas que el cliente realizó durante el mes en la linea de cajas de las sucursales del banco.",
+"ccomisiones_mantenimiento",0,43,24,0,"Cantidad de comisiones de mantenimiento de productos cobrardas durante el banco durante el mes.",
+"ccheques_depositados",0,402,82,0,"Cantidad de cheques que se depositaron en las cuentas del cliente durante el mes.",
+"ccheques_depositados_rechazados",0,22,11,0,"Cantidad de cheques que se depositaron en cuentas del cliente y fueron rechazados durante el mes.",
+"ccheques_emitidos_rechazados",0,54,19,0,"Cantidad de cheques emitidos por el cliente que fueron rechazados durante el mes.",
+"ccheques_emitidos",0,153,90,0,"Cantidad de cheques del cliente que se cobraron ( ya sea por el cliente mismo o por terceros )  durante el mes .",
+"ccaja_ahorro",2,10,9,0,"Cantidad de cajas de ahorro que tiene el cliente.",
+"Master_cadelantosefectivo",0,26,18,586300,"Cantidad de adelantos en efectivo que el cliente realizó durante ese mes.",-1
+"Visa_cadelantosefectivo",0,35,22,133593,"Cantidad de adelantos en efectivo que el cliente realizó durante ese mes.",-1
+"cpayroll_trx",0,293,75,0,"Cantidad de Acreditaciones de Haberes en relación de depencia que le hicieron al cliente en ese mes.  Un cliente puede estar en relacion de dependencia con mas de una empresa. Una empresa puede hacerle VARIOS depósitos al mismo empleado durante el mes.  Soalmente se consideran las acreditaciones de empresas que tienen un contrato con el banco.",
+"cliente_antiguedad",1,378,331,0,"Antiguedad medida en meses de el cliente.  Es de la ultima vez que esa persona reingresó como cliente del banco.",
+"tcallcenter",0,1,2,0,"{0,1} indica si la persona está adherida al canal de banca telefónica .",
+"thomebanking",0,1,2,0,"{0, 1} indica si el cliente está adherido al Home Banking",
+"tmobile_app",0,1,2,0,"{ 0, 1} indica si la persona se instaló alguna vez la aplicación movil",
+"Master_delinquency",0,1,2,101319,"{ 0, 1 }  indica si el cliente no llegó a completar el pago mínimo y esta moroso. Estos clientes NO pueden utilizar mas la tarjeta hasta tanto regularicen su situacion. Obviamente si les caen las cuotas de compras anteriores, intereses, punitorios, etc",-1
+"Visa_delinquency",0,1,2,48838,"{ 0, 1 }  indica si el cliente no llegó a completar el pago mínimo y esta moroso. Estos clientes NO pueden utilizar mas la tarjeta hasta tanto regularicen su situacion. Obviamente si les caen las cuotas de compras anteriores, intereses, punitorios, etc",-1
+"Master_status",0,9,4,101319,"{ 0,  6, 7, 9 }   indica el estado de la cuenta de la tarjeta de crédito. 0 abierta,  6 en proceso de cierre, 7 en proceso avanzado de cierre, 9 cuenta cerrada.   Una cuenta cerrada puede volver a abrirse !!",-1
+"Visa_status",0,9,4,48838,"{ 0,  6, 7, 9 }   indica el estado de la cuenta de la tarjeta de crédito. 0 abierta,  6 en proceso de cierre, 7 en proceso avanzado de cierre, 9 cuenta cerrada.   Una cuenta cerrada puede volver a abrirse !!",-1

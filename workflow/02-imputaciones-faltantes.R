@@ -6,7 +6,7 @@ con <- dbConnect(duckdb())
 data <- duckdb_read_csv(conn = con, "competencia_01",
                         files = "datasets/competencia_01.csv")
 
-reglas <- read_csv("DiccionarioDatos_2024_nulos.csv")
+reglas <- readr::read_csv("DiccionarioDatos_2024_nulos.txt")
 
 reglas <- reglas %>% select(var, CASO_NULL)
 

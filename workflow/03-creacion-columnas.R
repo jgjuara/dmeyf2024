@@ -1,14 +1,16 @@
 library(duckdb)
 library(tidyverse)
 
-source("workflow/macros_sql.R")
 
 con <- dbConnect(duckdb())
 
-data <- duckdb_read_csv(conn = con, "competencia_01",
-                        files = "datasets/competencia_01_imp_nulos.csv")
+source("workflow/macros_sql.R")
 
-reglas <- read_csv("workflow/rankscsv.csv")
+
+data <- duckdb_read_csv(conn = con, "competencia_01",
+                        files = "datasets/competencia_01.csv")
+
+reglas <- read_csv("workflow/rankscsv.txt")
 
 # para los arboles lo unico importante es el orden
 # trabajar con ranks o deciles etc nos permite despreocuparnos de temas relacionados a cambios nominales de mes a mes
@@ -246,9 +248,9 @@ columnas <- "lag1_clase_ternaria"
                 from competencia_01;"))
   
   
-exportcsv_query <-  "COPY competencia_01 TO 'datasets/competencia_01_aum.csv' (HEADER, DELIMITER ',');"
+exportcsv_query <-  "COPY competencia_01 TO 'datasets/competencia_01_aum_nonimp.csv' (HEADER, DELIMITER ',');"
 
-exportparquet_query <-  "COPY competencia_01 TO 'datasets/competencia_01_aum.parquet' (FORMAT PARQUET);"
+exportparquet_query <-  "COPY competencia_01 TO 'datasets/competencia_01_aum_nonimp.parquet' (FORMAT PARQUET);"
 dbExecute(con, exportparquet_query)
 dbExecute(con, exportcsv_query)
 

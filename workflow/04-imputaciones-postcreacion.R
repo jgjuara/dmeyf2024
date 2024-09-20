@@ -25,7 +25,7 @@ x <- names(x[x != 0])
 
 dfx <- tibble(varname = x, varcname = gsub("lag1_", "", x))
 
-reglas <- read_csv("reglas_imputacion-04.csv") %>% 
+reglas <- readr::read_csv("reglas_imputacion-04.txt") %>% 
   filter(varname  != "clase_ternaria")
 
 # reglas <- reglas %>% select(var, CASO_NULL)
@@ -42,7 +42,7 @@ vars_not_nulls  <- columnas$column_name[! columnas$column_name %in% x]
 #             by = c("varcname" = "var"))
 
 # dfx %>% 
-#   write_csv("reglas_imputacion-04.csv")
+#   write_csv("reglas_imputacion-04.txt")
 
 query_imputacion_nulos <- map2(reglas$varname, reglas$CASO_NULL,
                                function(x,y) {
