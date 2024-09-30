@@ -1,3 +1,4 @@
+#%%
 import pandas as pd
 import numpy as np
 import seaborn as sns
@@ -16,8 +17,11 @@ import urllib
 import lgbm_globales
 import funciones_lgbm
 
-X_train, y_train_binaria1, y_train_binaria2, w_train, X_test, y_test_class, y_test_binaria1, w_test = preparar_data(lgbm_globales.dataset_path, lgbm_globales.dataset_file, lgbm_globales.mes_train, lgbm_globales.mes_test)
+#%%
 
+X_train, y_train_binaria1, y_train_binaria2, w_train, X_test, y_test_class, y_test_binaria1, w_test = funciones_lgbm.preparar_data(lgbm_globales.dataset_path, lgbm_globales.dataset_file, lgbm_globales.mes_train, lgbm_globales.mes_test)
+
+#%%
 
 study = optuna.create_study(
     direction="maximize",
@@ -27,6 +31,7 @@ study = optuna.create_study(
 )
 
 
+#%%
 
 def backtesting_lgbm():
   
@@ -77,4 +82,7 @@ def backtesting_lgbm():
 
 
             df_cut_point.to_csv(lgbm_globales.dataset_path + 'df_cut_point-{study}-{trial}-{semilla}.csv'.format(study = lgbm_globales.study_name, trial = i, semilla = semilla), index=False)
+
+#%%
+backtesting_lgbm()
 

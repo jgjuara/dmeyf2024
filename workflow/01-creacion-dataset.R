@@ -1,10 +1,11 @@
 library(duckdb)
 # library(duckplyr)
 
-con <- dbConnect(duckdb())
+con <- dbConnect(duckdb(dbdir = "db/competencia_01.duckdb"))
 
 data <- duckdb_read_csv(conn = con, "competencia_01_crudo",
-                        files = here::here("datasets", "competencia_01_crudo.csv"))
+                        files = here::here("datasets",
+                                           "competencia_01_crudo.csv"))
 
 query <- "create or replace table competencia_01 as
 with periodos as (
@@ -36,8 +37,11 @@ conteo <- "select count(clase_ternaria) as casos, clase_ternaria from competenci
 
 dbGetQuery(conn = con, statement = conteo)
 
-exportparquet_query <-  "COPY competencia_01 TO 'datasets/competencia_01.parquet' (FORMAT PARQUET);"
-exportcsv_query <-  "COPY competencia_01 TO 'datasets/competencia_01.csv' (HEADER, DELIMITER ',');"
+# exportparquet_query <-  "COPY competencia_01 TO 'datasets/competencia_01.parquet' (FORMAT PARQUET);"
+# exportcsv_query <-  "COPY competencia_01 TO 'datasets/competencia_01.csv' (HEADER, DELIMITER ',');"
+# 
+# dbExecute(con, exportparquet_query)
+# dbExecute(con, exportcsv_query)
 
-dbExecute(con, exportparquet_query)
-dbExecute(con, exportcsv_query)
+dbListTables(conn = con)
+dbDisconnect(con)

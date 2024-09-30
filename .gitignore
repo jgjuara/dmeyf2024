@@ -154,3 +154,4 @@ project/target
 .Rproj.user
 src-juara/.env
 .Rhistory
+.Renviron
