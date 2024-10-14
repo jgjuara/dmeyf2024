@@ -1,1 +1,3 @@
+Para correr el script K009 solo hace falta cambiar el path del dataset. 
 
+Por lo demás, el código no se desvía significativamente de lo brindado por la cátedra.
