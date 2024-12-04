@@ -1,0 +1,2 @@
+k300 con corte 10500 (k304) + undersamling (k310)
+k305 agrega ctrx_norm
