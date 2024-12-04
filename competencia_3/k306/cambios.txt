@@ -1,0 +1,5 @@
+delta1 se agrega a los slopes
+
+optimizamos incluyendo 202106 (solo reservo 202107 para test)
+
+en backtesting voy a probar nueva fórmula para calcular sobre envíos
